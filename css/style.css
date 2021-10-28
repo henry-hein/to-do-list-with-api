@@ -1,1 +1,25 @@
+body {
+  background-color: grey;
+  font-size: 3rem;
+}
 
+.head {
+  font-size: 5rem;
+  color: rgb(158, 255, 231);
+}
+
+.custom {
+  color:rgb(158, 203, 255);
+}
+
+input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+  margin-top: 0;
+}
+
+.vert-center {
+  display: flex;
+  align-items: center;
+}
