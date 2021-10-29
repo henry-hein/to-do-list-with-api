@@ -1,6 +1,7 @@
 $(document).ready(function() {
   getTasks();
   addToDo();
+  deleteTask();
  
 
 
@@ -66,7 +67,7 @@ var addToDo = function () {
       addTaskToApi(toDoInput);
     }
   });
-
+}
 // Add list items to API after pressing enter
 var addTaskToApi = function (toDoInput) {
   $.ajax({
@@ -90,18 +91,24 @@ var addTaskToApi = function (toDoInput) {
 
 // Delete Tasks
 
-function deleteTask () {
-  $(document).on('click', '.btn.remove', function(event){
-    $(this).closest('label').remove();
-    var id = $('.remove').getAttribute('data-id');
-    console.log(id);
+  var deleteTask = function () {
+    $(document).on('click', '.btn.remove', function(){
+      var id = $('.remove').attr('data-id');
+      console.log(id);
+      $(this).closest('label').remove();
 
-  });
+      $.ajax({
+        type: 'DELETE',
+           url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks/' + id + '?api_key=177',
+           success: function (response, textStatus) {
+             console.log(response);
+           },
+           error: function (request, textStatus, errorMessage) {
+             console.log(errorMessage);
+           }
+         });
+
+    });
+  }
 
 
-}
-
-
-
-
-}
