@@ -11,7 +11,7 @@ $(document).ready(function() {
            url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks/' + id + '/mark_complete?api_key=177',
            dataType: 'json',
            success: function (response, textStatus) {
-             console.log('Marked Complete');
+             alert('Completed');
            },
            error: function (request, textStatus, errorMessage) {
              console.log(errorMessage);
@@ -23,7 +23,7 @@ $(document).ready(function() {
            url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks/' + id + '/mark_active?api_key=177',
            dataType: 'json',
            success: function (response, textStatus) {
-             console.log('Marked Active');
+             alert('Incomplete');
            },
            error: function (request, textStatus, errorMessage) {
              console.log(errorMessage);
