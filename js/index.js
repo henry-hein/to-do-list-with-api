@@ -2,12 +2,41 @@ $(document).ready(function() {
   getTasks();
   addToDo();
   deleteTask();
- 
-
+  
+  $(document).on('change', '.check', function() {
+    var id = $(this).siblings('button').attr('data-id');
+    if($(this).is(':checked')){
+      $.ajax({
+        type: 'PUT',
+           url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks/' + id + '/mark_complete?api_key=177',
+           dataType: 'json',
+           success: function (response, textStatus) {
+             console.log('Marked Complete');
+           },
+           error: function (request, textStatus, errorMessage) {
+             console.log(errorMessage);
+           }
+         });
+    } else {
+      $.ajax({
+        type: 'PUT',
+           url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks/' + id + '/mark_active?api_key=177',
+           dataType: 'json',
+           success: function (response, textStatus) {
+             console.log('Marked Active');
+           },
+           error: function (request, textStatus, errorMessage) {
+             console.log(errorMessage);
+           }
+         });
+    }
+  });
 
 });
-// Gets tasks stored in API
 
+
+
+// Gets tasks stored in API
 var getTasks = function () {
   $.ajax({
     type: 'GET',
@@ -42,6 +71,7 @@ var makeListItem = function () {
       div.setAttribute('class', 'vert-center');
       var checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
+      checkbox.setAttribute('class', 'check');
       var span = document.createElement('span');
       var removeButton = document.createElement('button');
       removeButton.setAttribute('class', 'btn remove');
@@ -90,11 +120,9 @@ var addTaskToApi = function (toDoInput) {
 }
 
 // Delete Tasks
-
   var deleteTask = function () {
     $(document).on('click', '.btn.remove', function(){
       var id = $('.remove').attr('data-id');
-      console.log(id);
       $(this).closest('label').remove();
 
       $.ajax({
@@ -107,8 +135,8 @@ var addTaskToApi = function (toDoInput) {
              console.log(errorMessage);
            }
          });
-
     });
+
   }
 
 
